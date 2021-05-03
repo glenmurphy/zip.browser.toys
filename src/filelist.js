@@ -53,9 +53,6 @@ function getContextMenu() {
 
 class ContextMenu {
   constructor() {
-    if (ContextMenu.instance)
-      return ContextMenu.instance;
-    
     document.body.addEventListener('click', this.handleDocumentClick.bind(this));
     this.elm = createElm({ parent : document.body, class : 'context-menu' });
     this.elm.style.display = 'none';
@@ -68,7 +65,6 @@ class ContextMenu {
     this.deleteButton.addEventListener('click', this.handleDelete.bind(this));
 
     this.item = null;
-    ContextMenu.instance = this;
   }
 
   dismiss() {
@@ -97,6 +93,7 @@ class ContextMenu {
 
   invoke(item, e) {
     this.item = item;
+
     if (item instanceof Folder) {
       this.downloadButton.style.display = 'none';
       this.renameButton.style.display = 'none';
@@ -106,9 +103,11 @@ class ContextMenu {
       this.renameButton.style.display = 'none';
       this.deleteButton.style.display = 'block';
     }
+
     var t = item.elm.getBoundingClientRect();
-    this.elm.style.top = t.top + 10;
-    this.elm.style.left = e.clientX + 10;
+    console.log(t);
+    this.elm.style.top = parseInt(t.top) + 10 + 'px';
+    this.elm.style.left = parseInt(e.clientX) + 10 + 'px';
     this.elm.style.display = 'block';
   }
 }
@@ -396,6 +395,9 @@ class FileList {
 
     this.elm = createElm({ parent : parentElm });
 
+    this.instructions = createElm({ parent : this.elm, class : 'instructions' });
+    this.instructions.innerHTML = 'Drag stuff around, drag new things in, right-click to edit and download individual files<br />&nbsp;'; 
+
     this.controls = createElm({ class : 'controls', parent : this.elm });
 
     this.root = new Folder('.');
@@ -418,12 +420,14 @@ class FileList {
     document.getElementById('title').style.display = 'none';
     this.root.elm.style.display = 'block';
     this.controls.style.display = 'block';
+    this.instructions.style.display = 'block';
   }
 
   hideControls() {
     document.getElementById('title').style.display = 'block';
     this.root.elm.style.display = 'none';
     this.controls.style.display = 'none';
+    this.instructions.style.display = 'none';
   }
 
   clear() {
