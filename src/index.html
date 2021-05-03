@@ -1,6 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <title>ZIP.browser.toys</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A web-based zip file creator and editor">
   <style type="text/css">
   body {
     margin:20px;
@@ -14,6 +18,10 @@
   }
   a:hover {
     color:#ff9;
+  }
+  #title {
+    font-size:12px;
+    font-weight:normal;
   }
   .context-menu {
     display:block;
@@ -104,12 +112,12 @@
   </style>
 </head>
 <body>
-  <div id="title">
+  <h1 id="title">
     ZIP FILE CREATOR AND EDITOR<br />
     Local and private - nothing is sent to the server<br /> <br />
     Drag files, folders, and zip files here, or <a id="picker"
   href="#">manually pick</a>
-  </div>
+  </h1>
   <div id="files"></div>
 </body>
 <script src="./dist/fflate.min.js"></script>
