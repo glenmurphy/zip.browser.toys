@@ -440,6 +440,9 @@ class FileList {
     var decompressed = fflate.unzipSync(compressed);
     for (var path in decompressed) {
       var p = path.split("/");
+      console.log(p);
+      if (p.indexOf("__MACOSX") > -1)
+        continue;
       var content = new File([decompressed[path]], p.pop());
       if (content.size == 0) continue;
       console.log(content);
