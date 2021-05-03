@@ -57,8 +57,9 @@ class FileHandler {
   }
 
   handlePaste(e) {
-    console.log('paste');
     e.preventDefault();
+    if (!e.clipboardData.files) return;
+    
     this.emit('files', {
       target : null,
       files : Array.from(e.clipboardData.files)
