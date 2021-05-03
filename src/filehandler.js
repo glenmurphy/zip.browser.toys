@@ -4,6 +4,7 @@ class FileHandler {
   constructor(elm) {
     window.addEventListener('drop', this.handleDrop.bind(this), false);
     window.addEventListener('dragover', this.handleDragOver.bind(this), false);
+    window.addEventListener('paste', this.handlePaste.bind(this), false);
   }
 
   handleDragOver(e) {
@@ -53,6 +54,15 @@ class FileHandler {
         files : files
       });
     })
+  }
+
+  handlePaste(e) {
+    console.log('paste');
+    e.preventDefault();
+    this.emit('files', {
+      target : null,
+      files : Array.from(e.clipboardData.files)
+    });
   }
 
   manualSelect(e) {
