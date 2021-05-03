@@ -1,0 +1,18 @@
+#docker-compose -f zip.compose.yaml up --force-recreate --build -d
+version: '3'
+services:
+  server-web-app:
+    restart: always
+    container_name: zip.browser.toys
+    build:
+      dockerfile: zip.dockerfile
+      context: .
+    environment:
+      VIRTUAL_HOST: zip.browser.toys
+      LETSENCRYPT_HOST: zip.browser.toys
+      LETSENCRYPT_EMAIL: glen@glenmurphy.com
+
+networks:
+  default:
+    external:
+      name: nginx-proxy

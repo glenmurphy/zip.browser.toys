@@ -1,0 +1,122 @@
+<html>
+<head>
+  <title>ZIP.browser.toys</title>
+  <style type="text/css">
+  body {
+    margin:20px;
+    font-size:12px;
+    background-color:#111;
+    color:#ff7;
+    font-family: 'Monaco', 'Consolas', monospace;
+  }
+  a, a:visited {
+    color:#ff7;
+  }
+  a:hover {
+    color:#ff9;
+  }
+  .context-menu {
+    display:block;
+    position:absolute;
+    top:0px;
+    left:0px;
+    max-width:180px;
+    border:1px solid #ff3;
+    box-shadow:0px 5px 12px rgba(0, 0, 0, 0.2);
+    color:#ff7;
+    background-color:black;
+  }
+  .context-menu > div {
+    padding:4px;
+    cursor:pointer;
+  }
+  .context-menu > div:hover {
+    color:#ff9;
+    background-color:rgba(255, 255, 255, 0.075);
+  }
+  #files {
+    max-width:400px;
+    overflow:hide;
+  }
+  .folder.selected {
+    background-color:rgba(255, 255, 255, 0.03);
+  }
+  .folder.dragover {
+    background-color:rgba(255, 255, 255, 0.03);
+  }
+  .folderList {
+    padding-left:8px;
+    margin-left:4px;
+    border-left:1px solid #222;
+  }
+  .fileList {
+    padding-left:8px;
+    margin-left:4px;
+    border-left:1px solid #222;
+    min-height:18px;
+  }
+  .folderName, .file {
+    cursor:pointer;
+    position:relative;
+    white-space:nowrap;
+    padding:2px 2px 2px 0px;
+  }
+  .folderName:hover, .file:hover {
+    background-color:rgba(255, 255, 255, 0.05);
+  }
+  .folderName.selected, .file.selected {
+    background-color:rgba(255, 255, 255, 0.1);
+  }
+  .file:hover > .file-controls {
+    display:block;
+  }
+  .file-controls {
+    display:none;
+    position:absolute;
+    right:0px;
+    top:0px;
+    padding:2px;
+    cursor:pointer;
+  }
+  .file-control {
+    color:rgb(116, 116, 16);
+    display:inline-block;
+    margin-right:9px;
+  }
+  .file-control:hover {
+    color:#ff7;
+  }
+  .controls {
+    margin-bottom:12px;
+  }
+  .control {
+    text-decoration:underline;
+    cursor:pointer;
+    display:inline;
+    margin-right:9px;
+  }
+  .control.zip {
+    font-weight:bold;
+  }
+  .control.status {
+    text-decoration:none;
+  }
+  </style>
+</head>
+<body>
+  <div id="title">
+    ZIP FILE CREATOR AND EDITOR<br />
+    Local and private - nothing is sent to the server<br /> <br />
+    Drag files, folders, and zip files here, or <a id="picker"
+  href="#">manually pick</a>
+  </div>
+  <div id="files"></div>
+</body>
+<script src="./dist/fflate.min.js"></script>
+<script src="./dist/filesaver.min.js"></script>
+<script src="filehandler.js"></script>
+<script src="filelist.js"></script>
+<script type="text/javascript">
+var fileList = new FileList(document.getElementById('files'));
+</script>
+</html>
